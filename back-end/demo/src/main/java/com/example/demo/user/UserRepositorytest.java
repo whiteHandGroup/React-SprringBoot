@@ -1,16 +1,16 @@
 package com.example.demo.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/crud", method = RequestMethod.GET)
 @RestController
+@CrossOrigin
 public class UserRepositorytest {
 
   @Autowired
@@ -35,4 +35,10 @@ public class UserRepositorytest {
     System.out.println("모든 유저 조회");
     System.out.println(userRepository.findAll());
   }
+
+  @PostMapping("/user/select/{no}")
+  public User findById(@PathVariable Long no) {
+    return userRepository.findById(no).orElseThrow(()->new IllegalArgumentException("해당 유저가 없습니다. id=" + no));
+  }
+
 }
