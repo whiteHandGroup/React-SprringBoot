@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/crud", method = RequestMethod.GET)
 @RestController
@@ -22,7 +24,7 @@ public class UserRepositorytest {
             .email("test01@gmail.com")
             .phone("010-1234-5678")
             .createdBy("admin")
-            .updatedBy("Glenn:안상재")
+            .updatedBy("Glenn")
             .build();
     // Create! 테이블 posts에 id 값이 있으면 update, 없으면 insert 수행
     userRepository.save(user);
@@ -38,4 +40,5 @@ public class UserRepositorytest {
   public User findById(@PathVariable Long no) {
     return userRepository.findById(no).orElseThrow(()->new IllegalArgumentException("해당 유저가 없습니다. id=" + no));
   }
+
 }
