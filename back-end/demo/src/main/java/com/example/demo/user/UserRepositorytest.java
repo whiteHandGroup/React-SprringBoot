@@ -24,7 +24,7 @@ public class UserRepositorytest {
             .email("test01@gmail.com")
             .phone("010-1234-5678")
             .createdBy("admin")
-            .updatedBy("Glenn")
+            .updatedBy("Glenn_안상재")
             .build();
     // Create! 테이블 posts에 id 값이 있으면 update, 없으면 insert 수행
     userRepository.save(user);
