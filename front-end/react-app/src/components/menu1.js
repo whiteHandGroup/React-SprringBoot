@@ -10,15 +10,6 @@ function menu1(){
             menu1
             menu1menu1
             menu1menu1
-
-            menu1
-            menu1
-            menu1
-            menu1
-
-
-
-
         </div>
     );
 }
