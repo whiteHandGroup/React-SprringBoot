@@ -4,7 +4,7 @@
 //4. localhost:3000 으로 데이터 불러와지는지 확인
 
 import React, {Component} from 'react';
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'; //리액트에�
 import Navigation from './components/nav';
 import Menu1 from './components/menu1';
 import Menu2 from './components/menu2';
-
+import Menu3 from './components/menu3';
 
 class App extends Component {
     constructor(props){
@@ -45,6 +45,7 @@ class App extends Component {
                     <Route exact path="/" element={<home />} />
                     <Route path="/menu1" element={<Menu1 />} />
                     <Route path="/menu2" element={<Menu2 />} />
+                    <Route path="/menu3" element={<Menu3 />} />
                 </Routes>
             </BrowserRouter>
            <h2>백엔드 통신 확인: {this.state.email}</h2>
