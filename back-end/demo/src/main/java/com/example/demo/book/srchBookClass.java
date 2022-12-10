@@ -22,10 +22,11 @@ public class srchBookClass {
         return bookRepository.findAll();
     }
 
-
-    // retrieve specific book Using bk_seq
-    /*@PostMapping("/user/select/{no}")
-    public User findById(@PathVariable Long no) {
-        return bookRepository.findById(no).orElseThrow(()->new IllegalArgumentException("해당 유저가 없습니다. id=" + no));
-    }*/
+//    지환이형
+//    @PostMapping("/insertBook")
+//    public List<Book> findAll() {
+//        System.out.println("책 추가");
+//        System.out.println(bookRepository.findAll());
+//        return bookRepository.findAll();
+//    }
 }
