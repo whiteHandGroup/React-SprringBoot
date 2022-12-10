@@ -4,25 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import home_Logo from '../images/home_Logo.png';
 
 function Navigation(){
-    {/*
-    return (
 
-       <div className="Navigation">
-            <Navbar bg="dark" variant="dark">
-                <Navbar.Brand href="/">logo place</Navbar.Brand>
-                <Nav className="mr-auto">
-                  <Nav.Link href="/menu1">menu1</Nav.Link>
-                  <Nav.Link href="menu2">menu2</Nav.Link>
-                </Nav>
-                <Form inline>
-                  <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                  <Button variant="outline-info">Search</Button>
-                </Form>
-             </Navbar>
-       </div>
-
-    );
-    */}
     return (
     <Navbar bg="light" expand="lg">
           <Container fluid>
