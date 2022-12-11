@@ -42,6 +42,7 @@ function Navigation(){
                   aria-label="Search"
                 />
                 <Button variant="outline-success">Search</Button>
+                <Button href ="/login">login</Button>
               </Form>
             </Navbar.Collapse>
           </Container>
