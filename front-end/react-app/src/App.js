@@ -15,6 +15,7 @@ import Menu1 from './components/menu1';
 import Menu2 from './components/menu2';
 import Menu3 from './components/menu3';
 import InsertBook from './components/insertBook';
+import Login from './components/login';
 
 class App extends Component {
     constructor(props){
@@ -48,6 +49,7 @@ class App extends Component {
                     <Route path="/menu2" element={<Menu2 />} />
                     <Route path="/menu3" element={<Menu3 />} />
                     <Route path="/insertBook" element={<InsertBook />} />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </BrowserRouter>
            <h2>백엔드 통신 확인: {this.state.email}</h2>
