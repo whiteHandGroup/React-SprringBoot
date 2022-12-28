@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import home_Logo from '../images/home_Logo.png';
+import InsertBook from "./insertBook";
 
 function Navigation(){
-
+    const [InsertBookOn, setInsertBookOn] = useState(false);
     return (
     <Navbar bg="light" expand="lg">
+          <InsertBook show={InsertBookOn} onHide={() => setInsertBookOn(false)}/>
           <Container fluid>
             <Navbar.Brand href="/">
                 <img
@@ -32,7 +34,7 @@ function Navigation(){
                   <NavDropdown.Item href="#action5">Something else here</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="#" disabled>Link</Nav.Link>
-                <Nav.Link href="/insertBook">도서 추가</Nav.Link>
+                <Nav.Link onClick={()=>setInsertBookOn(true)}>도서 추가</Nav.Link>
               </Nav>
               <Form className="d-flex" style={{marginLeft: '63%'}}>
                 <Form.Control

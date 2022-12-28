@@ -22,11 +22,12 @@ public class srchBookClass {
         return bookRepository.findAll();
     }
 
-//    지환이형
-//    @PostMapping("/insertBook")
-//    public List<Book> findAll() {
-//        System.out.println("책 추가");
-//        System.out.println(bookRepository.findAll());
-//        return bookRepository.findAll();
-//    }
+    @PostMapping("/insertBook")
+    public void createBook(@RequestBody Book book) {
+        System.out.println(book.getBk_name());
+        System.out.println(book.getBk_author());
+        System.out.println(book.getBk_publisher());
+        System.out.println(book.getBk_price());
+
+    }
 }

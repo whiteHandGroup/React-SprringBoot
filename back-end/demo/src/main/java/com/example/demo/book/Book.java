@@ -47,6 +47,8 @@ public class Book {
     @Column(insertable=true, nullable = false)
     private String bk_name;
     private String bk_publisher;
+    private String bk_author;
+    private String bk_price;
 
     @Column(nullable = false)
     private String reg_user;
@@ -58,10 +60,12 @@ public class Book {
     private LocalDateTime mod_date; // 수정일
 
     @Builder
-    public Book(String bk_name, String bk_publisher, String reg_user, LocalDateTime reg_date, String mod_user, LocalDateTime mod_date) {
+    public Book(String bk_name, String bk_publisher, String bk_author, String bk_price, String reg_user, LocalDateTime reg_date, String mod_user, LocalDateTime mod_date) {
         //this.bk_seq = bk_seq;
         this.bk_name = bk_name;
         this.bk_publisher = bk_publisher;
+        this.bk_author = bk_author;
+        this.bk_price = bk_price;
         this.reg_user = reg_user;
         this.reg_date = reg_date;
         this.mod_user = mod_user;
