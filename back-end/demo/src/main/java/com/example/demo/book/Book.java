@@ -46,8 +46,11 @@ public class Book {
 
     @Column(insertable=true, nullable = false)
     private String bk_name;
+    @Column(nullable = false)
     private String bk_publisher;
+    @Column(nullable = false)
     private String bk_author;
+    @Column(nullable = false)
     private String bk_price;
 
     @Column(nullable = false)
@@ -55,8 +58,9 @@ public class Book {
     @Column(nullable = false)
     private LocalDateTime reg_date; // 생성일
 
-    //@Column(nullable = false)
+    @Column(nullable = false)
     private String mod_user;        // 생성자
+    @Column(nullable = false)
     private LocalDateTime mod_date; // 수정일
 
     @Builder
