@@ -46,34 +46,44 @@ public class Book {
 
     @Column(insertable=true, nullable = false)
     private String bk_name;
-    @Column(nullable = false)
     private String bk_publisher;
-    @Column(nullable = false)
     private String bk_author;
-    @Column(nullable = false)
+    private String bk_genre;
     private String bk_price;
+
+    @Column(nullable = false)
+    private int bk_stock;
+
+    private String bk_img;
 
     @Column(nullable = false)
     private String reg_user;
     @Column(nullable = false)
     private LocalDateTime reg_date; // 생성일
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String mod_user;        // 생성자
-    @Column(nullable = false)
     private LocalDateTime mod_date; // 수정일
+    private String bk_sum; // 수정일
 
     @Builder
-    public Book(String bk_name, String bk_publisher, String bk_author, String bk_price, String reg_user, LocalDateTime reg_date, String mod_user, LocalDateTime mod_date) {
+    public Book(String bk_name, String bk_publisher, String bk_author,
+                String reg_user, String bk_price, int bk_stock, String bk_img,
+                LocalDateTime reg_date, String mod_user, LocalDateTime mod_date,
+                String bk_sum
+    ) {
         //this.bk_seq = bk_seq;
         this.bk_name = bk_name;
         this.bk_publisher = bk_publisher;
         this.bk_author = bk_author;
         this.bk_price = bk_price;
+        this.bk_stock = bk_stock;
+        this.bk_img = bk_img;
         this.reg_user = reg_user;
         this.reg_date = reg_date;
         this.mod_user = mod_user;
         this.mod_date = mod_date;
+        this.bk_sum = bk_sum;
     }
 }
 

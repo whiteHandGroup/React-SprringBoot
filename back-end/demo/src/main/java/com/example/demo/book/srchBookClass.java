@@ -2,6 +2,8 @@ package com.example.demo.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -17,10 +19,10 @@ public class srchBookClass {
 
     // retrieve all books
     @PostMapping("/selectAllBook")
-    public List<Book> findAll() {
-        System.out.println("모든 책 조회");
-        System.out.println(bookRepository.findAll());
-        return bookRepository.findAll();
+    public Page<Book> bookList(Pageable pageable) {
+        System.out.println( "페이지정보=" + pageable + "\n" +  "페이지 사이즈=" + pageable.getPageSize() + "\n" + "페이지 넘버=" + pageable.getPageNumber());
+
+        return bookRepository.findAll(pageable);
     }
 
     @PostMapping("/insertBook")

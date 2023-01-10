@@ -4,7 +4,6 @@
 //4. localhost:3000 으로 데이터 불러와지는지 확인
 
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
 

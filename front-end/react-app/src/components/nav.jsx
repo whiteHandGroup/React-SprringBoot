@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import home_Logo from '../images/home_Logo.png';
+import home_Logo from '../images/home_Logo2.png';
+import book_Logo from '../images/icon_book.png';
 import InsertBook from "./insertBook";
 
 function Navigation(){
@@ -12,9 +13,16 @@ function Navigation(){
           <Container fluid>
             <Navbar.Brand href="/">
                 <img
+                    className="book_logo"
+                    src={book_Logo}
+                    style={{ width: '75px' }}
+                    alt=""
+                />
+                <img
                     className="home_logo"
                     src={home_Logo}
                     style={{ width: '300px' }}
+                    alt=""
                 />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -37,13 +45,6 @@ function Navigation(){
                 <Nav.Link onClick={()=>setInsertBookOn(true)}>도서 추가</Nav.Link>
               </Nav>
               <Form className="d-flex" style={{marginLeft: '63%'}}>
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
                 <Button href ="/login">login</Button>
               </Form>
             </Navbar.Collapse>
