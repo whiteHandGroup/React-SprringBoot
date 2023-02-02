@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -17,12 +18,20 @@ public class srchBookClass {
     @Autowired
     private BookRepository bookRepository;
 
-    // retrieve all books
     @PostMapping("/selectAllBook")
-    public Page<Book> bookList(Pageable pageable) {
+    public Page<Book> bookList(@RequestParam(defaultValue = "empty") String searchWord, Pageable pageable) {
         System.out.println( "페이지정보=" + pageable + "\n" +  "페이지 사이즈=" + pageable.getPageSize() + "\n" + "페이지 넘버=" + pageable.getPageNumber());
 
-        return bookRepository.findAll(pageable);
+        Page<Book> list = null;
+
+        if(searchWord.equals("empty")){
+            list =  bookRepository.findAll(pageable);
+        }else{
+            Specification<Book> spec = Specification.where(searchSpecification.likeBk_sum(searchWord));
+            spec = spec.and(searchSpecification.likeBk_sum(searchWord));
+            list = bookRepository.findAll(spec, pageable);
+        }
+        return list;
     }
 
     @PostMapping("/insertBook")

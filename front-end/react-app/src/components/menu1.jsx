@@ -9,38 +9,48 @@ import 'rc-pagination/assets/index.css';
 import Pagination from 'rc-pagination';
 
 
+
 function Menu1(){
        const [bookData, setBookData] = useState([]);
        const [totalPageData, setTotalPageData] = useState(0);
        const [pageData, setPageData] = useState(0);
-
-       //const pageButton = useRef();
-        const [totalCount, setTotalCount] = useState(0);
-        const [currentPage, setCurrentPage] = useState(0);
-
+       const [totalCount, setTotalCount] = useState(0);
+       const [currentPage, setCurrentPage] = useState(0);
+       const [searchData, setSearchData] = useState({searchWord:''});
 
        useEffect(() =>{
-            bringData(currentPage);
+             /*alert(JSON.stringify(searchData));*/
+             bringData(currentPage);
        },[currentPage])
 
-       /* 페이징 전체페이지 뿌려주기. */
-       /*function totalPage(){
-            var tagArr = [];
-            for (var i = 1; i <= totalPageData; i++){
-                tagArr.push(<li class="page-item"><a class="page-link" onClick={() => bringData()}>{i}</a></li>);
-            }
-            return tagArr;
-       }*/
+
+       const onCheckEnter = (e) => {
+           if(e.key === 'Enter') {
+             searchEvent();
+           }
+       }
+       function searchWord(e) {
+            ///console.log(e.target.value)
+            setSearchData({...searchData,searchWord:e.target.value})
+       }
+       function searchEvent(){
+            alert(JSON.stringify(searchData));
+            axios.get('/book/selectAllBook', {params: searchData })
+            .then(res => {
+                console.log(res.data);
+                console.log(res.data.pageable.pageNumber);
+                setBookData(res.data.content);
+                setPageData(res.data.pageable);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+       }
 
        /* 책 리스트 가져오기 */
        async function bringData(currentPage) {
            await axios
-           .get("/book/selectAllBook", {params:{
-                                                            size: 8,
-                                                            page: currentPage,
-                                                         }
-                                                  })
-           //.get("/book/selectAllBook")
+           .get("/book/selectAllBook", {params: {size: 8, page: currentPage} })
            .then((res)=>{
                console.log(res.data);
                console.log(res.data.pageable.pageNumber);
@@ -54,6 +64,7 @@ function Menu1(){
                console.log(err);
            })
        }
+
 
     return(
             <div className="book-store">
@@ -91,16 +102,16 @@ function Menu1(){
                         {/* 종합 베스트 */}
                         {bookData.map((item)=>{
                         return(
-                        <div className="week year">
-                            <div className="author-title">종합 베스트</div>
-                            <div className="year-book">
-                                <img src={item.bk_img} alt="" className="year-book-img"></img>
-                                <div className="year-book-content">
-                                    <div className="year-book-name">{item.bk_name}</div>
-                                    <div className="year-book-author">{item.bk_author}</div>
+                            <div className="week year">
+                                <div className="author-title">종합 베스트</div>
+                                <div className="year-book">
+                                    <img src={item.bk_img} alt="" className="year-book-img"></img>
+                                    <div className="year-book-content">
+                                        <div className="year-book-name">{item.bk_name}</div>
+                                        <div className="year-book-author">{item.bk_author}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         );
                         })}
                         <div className="overlay"></div>
@@ -108,15 +119,10 @@ function Menu1(){
 
                     {/* 장르 분류 바 */}
                     <div className="popular-books">
-                            <Form className="d-flex" style={{marginLeft: '63%'}}>
-                                <Form.Control
-                                  type="search"
-                                  placeholder="Search"
-                                  className="me-2"
-                                  aria-label="Search"
-                                />
-                                <Button variant="outline-success">Search</Button>
-                            </Form>
+                        <Form className="d-flex" style={{marginLeft: '63%'}} onKeyPress={onCheckEnter}>
+                            <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" onChange={searchWord} />
+                            <Button variant="outline-success"  onClick={searchEvent} >Search</Button>
+                        </Form>
                         <div className="main-menu">
                             <div className="genre">Popular by Genre</div>
                             <div className="book-types">
@@ -169,9 +175,9 @@ function Menu1(){
                                 </div>
                             );
                             })}
-                                {/* 페이징 */}
-                                <Pagination total={totalCount} current={currentPage} onChange={(page) => setCurrentPage(page)}
-                                />
+
+                            {/* 페이징 */}
+                            <Pagination total={totalCount} current={currentPage} onChange={(page) => setCurrentPage(page)} />
                         </div>
                     </div>
                 </div>
