@@ -804,3 +804,23 @@ h1 {
   padding: 20px;
  }
 }
+
+/* 도서 유형별 검색 셀렉트박스 Css */
+.bo_w_select {
+    width: 60%;
+    margin-right: 3%;
+    padding: 10px; /* 내부여백 */
+    padding-left: 12px;
+    border: 1px solid #ddd;
+    background: url(../images/arrow_down_18dp.png) no-repeat right 50%; /* 화살표 위치 */
+    background-size: 30px; /* 화살표 크기 */
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 12px;
+    color: #000;
+    outline:none;
+}
+.bo_w_select:hover {border: 1px solid #aaa;} /* 마우스오버 */

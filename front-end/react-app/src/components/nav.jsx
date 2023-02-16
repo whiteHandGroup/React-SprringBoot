@@ -32,7 +32,7 @@ function Navigation(){
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                <Nav.Link href="/menu1">안상재</Nav.Link>
+                <Nav.Link href="/menu1">도서</Nav.Link>
                 <Nav.Link href="/menu2">반지환</Nav.Link>
                 <Nav.Link href="/menu3">박나혜</Nav.Link>
                 <NavDropdown title="Link" id="navbarScrollingDropdown">

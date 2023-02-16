@@ -17,6 +17,7 @@ function Menu1(){
        const [totalCount, setTotalCount] = useState(0);
        const [currentPage, setCurrentPage] = useState(0);
        const [searchData, setSearchData] = useState({searchWord:''});
+       const [searchType, setSearchType] = useState("");
 
        useEffect(() =>{
              /*alert(JSON.stringify(searchData));*/
@@ -34,8 +35,13 @@ function Menu1(){
             setSearchData({...searchData,searchWord:e.target.value})
        }
        function searchEvent(){
-            alert(JSON.stringify(searchData));
-            axios.get('/book/selectAllBook', {params: searchData })
+            alert(JSON.stringify(searchData) + "그리고,,," + JSON.stringify(searchType));
+            axios.get('/book/selectAllBook', {
+              params: {
+                ...searchData,
+                searchType: searchType,
+              }
+            })
             .then(res => {
                 console.log(res.data);
                 console.log(res.data.pageable.pageNumber);
@@ -120,11 +126,19 @@ function Menu1(){
                     {/* 장르 분류 바 */}
                     <div className="popular-books">
                         <Form className="d-flex" style={{marginLeft: '63%'}} onKeyPress={onCheckEnter}>
+                            <select class="bo_w_select" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+                                <option value="all">전체</option>
+                                <option value="bk_name">제목</option>
+                                <option value="bk_sum">내용</option>
+                                <option value="bk_publisher">출판사</option>
+                                <option value="bk_author">저자</option>
+                            </select>
                             <Form.Control type="search" placeholder="Search" className="me-2" aria-label="Search" onChange={searchWord} />
-                            <Button variant="outline-success"  onClick={searchEvent} >Search</Button>
+                            <Button variant="outline-success" onClick={() => searchEvent(searchType)}>Search</Button>
                         </Form>
                         <div className="main-menu">
                             <div className="genre">Popular by Genre</div>
+                            {/*
                             <div className="book-types">
                                 <a href="#" className="book-type active"> All </a>
                                 <a href="#" className="book-type"> 무협 </a>
@@ -133,6 +147,7 @@ function Menu1(){
                                 <a href="#" className="book-type"> 코믹 </a>
                                 <a href="#" className="book-type"> 멜로 </a>
                             </div>
+                            */}
                         </div>
 
                         {/* 책 목록 */}

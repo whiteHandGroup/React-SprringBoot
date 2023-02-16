@@ -1,12 +1,18 @@
 package com.example.demo.book;
 
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,21 +23,50 @@ import java.util.List;
 public class srchBookClass {
     @Autowired
     private BookRepository bookRepository;
-
+    private final JPAQueryFactory queryFactory;
+    private QBook qbook;
+    @PostConstruct
+    public void init() {
+        qbook = QBook.book;
+    }
     @PostMapping("/selectAllBook")
-    public Page<Book> bookList(@RequestParam(defaultValue = "empty") String searchWord, Pageable pageable) {
-        System.out.println( "페이지정보=" + pageable + "\n" +  "페이지 사이즈=" + pageable.getPageSize() + "\n" + "페이지 넘버=" + pageable.getPageNumber());
+    public Page<Book> bookList(@RequestParam(defaultValue = "") String searchWord,
+                               @RequestParam(defaultValue = "") String searchType,
+                               @PageableDefault(size = 10, page = 0) Pageable pageable) {
 
-        Page<Book> list = null;
+        JPAQuery<Book> query = queryFactory
+                .select(Projections.constructor(Book.class,
+                        qbook.bk_seq, qbook.bk_name, qbook.bk_publisher,
+                        qbook.bk_author, qbook.bk_genre, qbook.bk_price,
+                        qbook.bk_stock, qbook.bk_img, qbook.reg_user,
+                        qbook.reg_date, qbook.mod_user, qbook.mod_date,
+                        qbook.bk_sum))
+                .from(qbook)
+                .where(containKeyword(searchWord, searchType));
 
-        if(searchWord.equals("empty")){
-            list =  bookRepository.findAll(pageable);
-        }else{
-            Specification<Book> spec = Specification.where(searchSpecification.likeBk_sum(searchWord));
-            spec = spec.and(searchSpecification.likeBk_sum(searchWord));
-            list = bookRepository.findAll(spec, pageable);
+        long total = query.fetchCount();
+
+        List<Book> contents = query
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        return new PageImpl<>(contents, pageable, total);
+    }
+
+    private BooleanExpression containKeyword(String searchWord, String searchType){
+        if((searchWord == null || searchWord.isEmpty()) && searchType.isEmpty()){
+            return null;
+        }else if(searchType.equals("bk_name")) {
+            return qbook.bk_name.like("%" + searchWord + "%");
+        }else if (searchType.equals("bk_sum")) {
+            return qbook.bk_sum.like("%" + searchWord + "%");
+        }else if (searchType.equals("bk_publisher")) {
+            return qbook.bk_publisher.like("%" + searchWord + "%");
+        }else if (searchType.equals("bk_author")) {
+            return qbook.bk_author.like("%" + searchWord + "%");
         }
-        return list;
+        return qbook.bk_sum.like("%" + searchWord + "%");
     }
 
     @PostMapping("/insertBook")
