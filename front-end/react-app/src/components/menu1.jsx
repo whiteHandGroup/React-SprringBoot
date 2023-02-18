@@ -7,6 +7,7 @@ import Won from '../images/won.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'rc-pagination/assets/index.css';
 import Pagination from 'rc-pagination';
+import RealTimeBest from './realTimeBest';
 
 
 
@@ -20,7 +21,6 @@ function Menu1(){
        const [searchType, setSearchType] = useState("");
 
        useEffect(() =>{
-             /*alert(JSON.stringify(searchData));*/
              bringData(currentPage);
        },[currentPage])
 
@@ -77,49 +77,22 @@ function Menu1(){
                 <div className="main-wrapper">
                     <div className="books-of">
                         {/* 실시간 베스트 */}
-                        <div className="week">
-                            <div className="author-title">실시간 베스트</div>
-                            <div className="author">
-                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=80"
-                                    alt="" className="author-img">
-                                </img>
-                                <div className="author-name">Sebastian Jeremy</div>
-                            </div>
-                            <div className="author">
-                                <img src="https://images.unsplash.com/photo-1586297098710-0382a496c814?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-                                    alt="" className="author-img">
-                                </img>
-                                <div className="author-name">Jonathan Doe</div>
-                            </div>
-                            <div className="author">
-                                <img src="https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                    alt="" className="author-img">
-                                </img>
-                                <div className="author-name">Angeline Summer</div>
-                            </div>
-                            <div className="author">
-                                <img src="https://pbs.twimg.com/profile_images/737221709267374081/sdwta9Oh.jpg" alt=""
-                                    className="author-img">
-                                </img>
-                                <div className="author-name">Noah Jones</div>
-                            </div>
-                        </div>
-
+                        <RealTimeBest />
                         {/* 종합 베스트 */}
-                        {bookData.map((item)=>{
-                        return(
                             <div className="week year">
                                 <div className="author-title">종합 베스트</div>
-                                <div className="year-book">
-                                    <img src={item.bk_img} alt="" className="year-book-img"></img>
-                                    <div className="year-book-content">
-                                        <div className="year-book-name">{item.bk_name}</div>
-                                        <div className="year-book-author">{item.bk_author}</div>
+                                {bookData.map((item)=>{
+                                return(
+                                    <div className="year-book">
+                                        <img src={item.bk_img} alt="" className="year-book-img"></img>
+                                        <div className="year-book-content">
+                                            <div className="year-book-name">{item.bk_name}</div>
+                                            <div className="year-book-author">{item.bk_author}</div>
+                                        </div>
                                     </div>
-                                </div>
+                                    );
+                                })}
                             </div>
-                        );
-                        })}
                         <div className="overlay"></div>
                     </div>
 

@@ -50,7 +50,8 @@ public class srchBookClass {
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
-
+        System.out
+                .println("<<<<<   working query   >>>>>\n" + query);
         return new PageImpl<>(contents, pageable, total);
     }
 
@@ -66,7 +67,7 @@ public class srchBookClass {
         }else if (searchType.equals("bk_author")) {
             return qbook.bk_author.like("%" + searchWord + "%");
         }
-        return qbook.bk_sum.like("%" + searchWord + "%");
+        return qbook.bk_name.like("%" + searchWord + "%");
     }
 
     @PostMapping("/insertBook")

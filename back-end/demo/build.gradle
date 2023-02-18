@@ -40,6 +40,9 @@ dependencies {
 	//querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	// crawling for realtimeBest data
+	implementation 'org.jsoup:jsoup:1.14.2'
 }
 
 //querydsl 추가

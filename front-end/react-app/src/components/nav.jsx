@@ -11,7 +11,7 @@ function Navigation(){
     <Navbar bg="light" expand="lg">
           <InsertBook show={InsertBookOn} onHide={() => setInsertBookOn(false)}/>
           <Container fluid>
-            <Navbar.Brand href="/">
+            <Navbar.Brand href="/menu1">
                 <img
                     className="book_logo"
                     src={book_Logo}
